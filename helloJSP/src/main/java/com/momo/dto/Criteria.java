@@ -12,7 +12,10 @@ public class Criteria {
 	private int endNum;
 	
 	public Criteria() {
-		
+		// 시작 번호와 끝번호를 구합니다.
+		// -> 페이지 조회 쿼리에서 사용됩니다.
+		endNum = pageNo * amount;
+		startNum = endNum - (amount-1);
 	}
 	
 	/**

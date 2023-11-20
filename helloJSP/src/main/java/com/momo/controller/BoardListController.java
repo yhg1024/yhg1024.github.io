@@ -1,15 +1,19 @@
 package com.momo.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.tagext.PageData;
 
 import com.momo.dao.BoardDao;
 import com.momo.dto.BoardDto;
 import com.momo.dto.Criteria;
+import com.momo.dto.PageDto;
 
 @WebServlet("/BoardListController")
 public class BoardListController extends HttpServlet {
@@ -23,13 +27,15 @@ public class BoardListController extends HttpServlet {
 		
 		// 리스트 조회후 리퀘스트 영역에 저장
 		BoardDao dao = new BoardDao();
-		request.setAttribute("list", dao.getList(cri));
+		List<BoardDto> list = dao.getList(cri);
+		request.setAttribute("list", list);
 		
 		// 페이지 블럭을 생성하기 위해 필요한 정보를 저장
-		// cri : 요청페이지번호, 페이지당 게시물 수
-		request.setAttribute("cri", cri);
-		// totalCnt : 총 게시물의 수
-		request.setAttribute("totalCnt", dao.getTotalCnt());
+		int totalCnt = dao.getTotalCnt();
+		PageDto pageDto = new PageDto(totalCnt, cri);
+		request.setAttribute("pageDto", pageDto);
+		
+		dao.close();
 		
 		// 페이지 전환
 		// forward방식으로 전환하므로 request영역이 공유

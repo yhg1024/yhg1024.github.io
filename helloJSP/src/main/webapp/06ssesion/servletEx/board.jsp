@@ -4,11 +4,22 @@
 <%@page import="com.momo.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	form, h2{
+		text-align: center;
+	}
+	#table{
+		width: 600px;
+		margin: 0 auto;
+	}
+
+</style>
 </head>
 <body>
 
@@ -52,27 +63,18 @@
  	*버튼 생성했더라도  form안에 버튼이 하나밖에 없다면 해당 버튼은 서브밋 버튼이 된다.
   -->
 	 <form method="get" name="loginForm">
-	 <% 
-	 	// getAttribute의 반환 타입은 Object이므로 형변환이 필요합니다.
-	 	// nullpointException을 방지하기 위해서 null체크를 진행
-	 	// 로그인 버튼이 나오려면 - 
-	 	// 로그아웃 버튼이 나오려면
-	 	if(session.getAttribute("userId") != null 
-	 		&& !"".equals(session.getAttribute("userId").toString())) {
-	 		// 로그인한 사용자 - 로그아웃버튼 -> 세션을 만료 시키고 로그인페이지로 이동
-	%>
-		<%= session.getAttribute("userId") %> 님 환영합니다.
+	 <c:if test="${empty userId }">
+	 	<button id="loginBtn">로그인</button>
+	 </c:if>
+	 <c:if test="${not empty userId }">
+	 	${userId }님 환영합니다.
 		 <button id="logoutBtn">로그아웃</button>
-	<% 		
-	 	} else {
-	 		// 로그인하지 않은 사용자 - 로그인버튼 출력 -> 로그인 페이지로 이동
-	%>
-		 <button id="loginBtn">로그인</button>
-	<%  		
-	 	}
-	 %>
-	 
-	 <table border="1">
+	 </c:if>
+
+	 </form>
+	 <h2>게시글 목록</h2>
+
+	 <table id="table" border="1">
 		<tr>
 			<th>일련변호</th>
 			<th>제목</th>
@@ -81,25 +83,26 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
+		<!-- 변수를 4가지 영역중 한곳에 저장 -->
+		<!-- 만약 리스트의 사이즈가 0이라면 조회된 데이터가 없습니다. 출력
+			만약 리스트의 사이즈가 0이 아니라면 목록을 출력 -->
+			<c:if test="${empty list }" var="result">
+				<tr><td colspan="6">조회된 데이터가 존재하지않습니다.</td></tr>
+			</c:if>
+			<c:forEach items="${list }" var="dto" >
+				<tr>
+					<td>${dto.num }</td>
+					<td><a href="/BoardDetailController?num=${dto.num }">${dto.title }</a></td>
+					<td>${dto.content }</td>
+					<td>${dto.id }</td>
+					<td>${dto.postdate }</td>
+					<td>${dto.visitcount }</td>
+				</tr>
+			</c:forEach>
 		
-		<%
-			if(request.getAttribute("list") != null) {
-				List<BoardDto> list = (List<BoardDto>)request.getAttribute("list");
-				for(BoardDto dto : list){		
-		%>
-		
-		<tr>
-			<td><%= dto.getNum()%></td>
-			<td><a href="/BoardDetailController?num=<%= dto.getNum() %>"><%= dto.getTitle()%></a></td>
-			<td><%= dto.getContent()%></td>
-			<td><%= dto.getId()%></td>
-			<td><%= dto.getPostdate()%></td>
-			<td><%= dto.getVisitcount()%></td>
-		</tr>
-	
-		<%		}
-			} %>
 	</table>
+	<!-- pageNavi include -->
+	<%@ include file="PageNav.jsp" %>
 	
 	<!-- 페이지 네비게이션 작성
 		- 페이지 번호 pageNo
@@ -110,40 +113,6 @@
 		- 페이지당 게시물의 수 amount
 			진짜 블럭의 끝번호
 	 --> 
-	 
-	 <% 
-	 	out.print("<br>페이지 블럭 시작=========================================");
-	 	 // 연산을 위해서 (올림처리를 위해) double 타입으로 선언
-	 	 // java에서 int/int = int
-	 	double pagePerBlock = 10.0;
-	 	int startNo = 0;
-	 	int endNo = 0;
-	 	
-	 	Criteria cri = new Criteria();
-	 	int totalCnt = 0;
-	 	if(request.getAttribute("cri") != null && !"".equals(request.getAttribute("cri"))) {
-	 		cri = (Criteria)request.getAttribute("cri");
-	 		out.println("<br>요청페이지번호 - pageNo : " + cri.getPageNo());
-	 		out.println("<br>페이지당 게시물 수 - amount : " + cri.getAmount());
-	 	}
-	 	if(request.getAttribute("totalCnt") != null && !"".equals(request.getAttribute("totalCnt"))) {
-	 		totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
-	 		out.println("<br>총 게시물의 수 - totalCnt : " + totalCnt);
-	 	}
-	 	
-	 	// 페이지 블럭의 시작 번호와 끝번호 구하기
-	 	// 끝번호 구하기
-	 	// 7페이지 요청 : 올림(7/10.0) * 10
-	 	// 11페이지 요청 : 올림(11/10.0) * 10
-	 	endNo = (int)(Math.ceil(cri.getPageNo() / pagePerBlock) * pagePerBlock);
-	 	startNo = endNo - ((int)pagePerBlock -1);
-	 	
-	 	out.print("<br>");
-	 	// 페이지 블럭을 생성
-	 	for(int i = startNo; i <= endNo; i++) {
-	 		out.print("<a href='/BoardListController?pageNo=" +i+ "'>" + i + "</a> ");
-	 	}
-	 %>
-	 </form>
+
 </body>
 </html>

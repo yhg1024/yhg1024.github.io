@@ -96,16 +96,16 @@ public class BoardDao extends DBConnPool{
 		
 			try {
 				pstmt = con.prepareStatement("select *\r\n"
-							+ "from (\r\n"
-							+ "    select rownum rnum, b.*\r\n"
-							+ "    from(\r\n"
-							+ "        select rownum, b.*\r\n"
-							+ "            from board b\r\n"
-							+ "        -- 최신순으로 정렬\r\n"
-							+ "        order by num desc\r\n"
-							+ "    )b\r\n"
-							+ ")\r\n"
-							+ "where rnum between ? and ?");
+											+ "from (\r\n"
+											+ "    select rownum rnum, b.*\r\n"
+											+ "    from(\r\n"
+											+ "        select rownum, b.*\r\n"
+											+ "            from board b\r\n"
+											+ "        -- 최신순으로 정렬\r\n"
+											+ "        order by num desc\r\n"
+											+ "    )b\r\n"
+											+ ")\r\n"
+											+ "where rnum between ? and ?");
 				
 				pstmt.setInt(1, cri.getStartNum());
 				pstmt.setInt(2, cri.getEndNum());
