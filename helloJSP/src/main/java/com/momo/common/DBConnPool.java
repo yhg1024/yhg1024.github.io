@@ -55,4 +55,20 @@ public class DBConnPool {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 페이지쿼리를 생성해주는 메서드
+	 * @param sql
+	 * @return
+	 */
+	public String pageingQuery(String sql) {
+		// order by 절보다 select절이 먼저 실행이 되어서 정렬이 되기전에 번호가 붙어요
+		String before = "select * from (\r\n"
+				+ "select t.*, ROWNUM rnum from (";
+		
+		String after = ") t \r\n" 
+				+ ")\r\n" 
+				+ "where rnum between ? and ?";
+		return before + sql + after;
+	}
 }

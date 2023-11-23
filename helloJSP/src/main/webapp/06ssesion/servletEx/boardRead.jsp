@@ -8,12 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-num : <%= request.getParameter("num") %>
+<form action="/BoardListController" name="searchForm">
+	num : <input type="text" name="num" value="${param.num }"> <br>
+	pageNo : <input type="text" name="pageNo" value="${param.pageNo }"> <br>
+	searchWord : <input type="text" name="searchWord" value="${param.searchWord }"> <br>
+	searchField : <input type="text" name="searchField" value="${param.searchField }"> <br>
+</form>
+
 <script type="text/javascript">
 	window.onload = function(){
 		// 버튼을 클릭하면 리스트 페이지로 이동
 		listBtn.onclick = function() {
-			location.href='/BoardListController';
+			// location.href='/BoardListController';
+			searchForm.submit();
 		}
 		
 		//editBtn.addEventListener('click', function(){

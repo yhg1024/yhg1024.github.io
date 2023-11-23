@@ -23,7 +23,16 @@ public class BoardListController extends HttpServlet {
 		
 		// 리스트를 조회하기 위한 파라메터 수집
 		Criteria cri = new Criteria(request.getParameter("pageNo")
-						, request.getParameter("amount"));
+						, request.getParameter("amount")
+						, request.getParameter("searchWord")
+						, request.getParameter("searchField"));
+		
+		String search = request.getParameter("searchWord");
+		String field = request.getParameter("searchField");
+		System.out.println("검색어" + search);
+		System.out.println("검색필드" + field);
+		
+		System.out.println(cri);
 		
 		// 리스트 조회후 리퀘스트 영역에 저장
 		BoardDao dao = new BoardDao();
@@ -31,7 +40,8 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		// 페이지 블럭을 생성하기 위해 필요한 정보를 저장
-		int totalCnt = dao.getTotalCnt();
+		// 조회조건을 세팅하지 않으면 조회되는 게시글의 건수와 페이지블럭이 다르게 표시 될 수 있다.
+		int totalCnt = dao.getTotalCnt(cri);
 		PageDto pageDto = new PageDto(totalCnt, cri);
 		request.setAttribute("pageDto", pageDto);
 		
