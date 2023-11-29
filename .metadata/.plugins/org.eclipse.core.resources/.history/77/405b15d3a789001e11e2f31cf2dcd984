@@ -1,0 +1,77 @@
+package com.momo.lib.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.momo.common.DBConnPool;
+import com.momo.lib.dto.BookDto;
+
+public class BookDao extends DBConnPool{
+	
+	/**
+	 * 도서목록을 조회 후 리스트를 반환합니다.
+	 * @return
+	 */
+	public List<BookDto> getList() {
+		List<BookDto> list = new ArrayList<>();
+		String sql = "select * from book";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery(sql);
+			
+			// 결과집합으로부터 도서의 정보를 가지고와서 dto에 저장 후 리스트에 담아줍니다.
+			while(rs.next()) {
+				String no = rs.getString("no");
+				String title = rs.getString("title");
+				String author = rs.getString("author");
+				String rentyn = rs.getString("rentyn");
+				
+				BookDto dto = new BookDto(no, title, rentyn, author);
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 도서의 상세 정보를 조회 후 반환합니다.
+	 * @param no
+	 * @return
+	 */
+	public BookDto view(String no) {
+		BookDto dto = new BookDto();
+		String sql = "select * from book where no = ?";
+		// 쿼리를 날릴수있는걸? con에서 빼온다
+		try {
+			pstmt = con.prepareStatement(sql);
+			// ?의 갯수만큼 파라메터를 설정합니다.
+			pstmt.setString(1, no);			
+			rs = pstmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				String no = rs.getString("no");
+				String title = rs.getString("title");
+				String author = rs.getString("author");
+				String rentyn = rs.getString("rentyn");
+				
+				dto.setNo(no);
+				dto.setTitle(title);
+				dto.setAuthor(author);
+				dto.setRentYn(rentyn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+}
+
+
+

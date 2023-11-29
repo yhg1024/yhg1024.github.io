@@ -1,0 +1,49 @@
+package com.momo.dto;
+
+public class MemberDto {
+	public String ID;
+	public String PASS;
+	public String NAME;
+	public String REGIDATE;
+	public String EMAIL;
+	
+	public MemberDto(String iD, String pASS, String nAME, String eMAIL) {
+		super();
+		ID = iD;
+		PASS = pASS;
+		NAME = nAME;
+		EMAIL = eMAIL;
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public String getPASS() {
+		return PASS;
+	}
+	public void setPASS(String pASS) {
+		PASS = pASS;
+	}
+	public String getNAME() {
+		return NAME;
+	}
+	public void setNAME(String nAME) {
+		NAME = nAME;
+	}
+	public String getREGIDATE() {
+		return REGIDATE;
+	}
+	public void setREGIDATE(String rEGIDATE) {
+		REGIDATE = rEGIDATE;
+	}
+	public String getEMAIL() {
+		return EMAIL;
+	}
+	public void setEMAIL(String eMAIL) {
+		EMAIL = eMAIL;
+	}
+	
+}

@@ -1,0 +1,40 @@
+package com.momo.book.controller;
+
+import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+
+/**
+ * Servlet implementation class uploadProcess
+ */
+@WebServlet("/uploadProcess")
+public class UploadProcess extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("method : get ").append(request.getContextPath());
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// enctype을 지정하게 되면 더이상 request.getParameter()를 이용해서 폼요소의 값을 읽어올 수 없다.
+		System.out.println("request.getParameter()" + request.getParameter("name"));
+		// 업로드된 파일의 경로를 출력
+		
+		// 1. MultipartRequest 객체 생성
+		MultipartRequest mr = new MultipartRequest(request, "c:/upload");
+		System.out.println("mr.getParameter()" + mr.getParameter("name"));
+		
+		// name속성을 이용해 파일을 확인
+		String fileName = mr.getFilesystemName("attachedFile");
+		System.out.println("파일명 : " + fileName);
+	}
+
+}

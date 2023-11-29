@@ -54,7 +54,7 @@ public class Criteria {
 	 * @param pageNo
 	 * @param amount
 	 */
-	public Criteria(String pageNo, String amount, String searchWord, String searchField) {
+	public Criteria(String pageNo, String amount, String searchField, String searchWord) {
 		
 		// 페이지 정보 세팅
 		if(pageNo != null && !"".equals(pageNo)) {

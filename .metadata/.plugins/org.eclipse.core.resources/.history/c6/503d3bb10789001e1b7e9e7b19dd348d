@@ -1,0 +1,5 @@
+package com.momo.lib.dto;
+
+public class BookDto {
+
+}

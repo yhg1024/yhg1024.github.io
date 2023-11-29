@@ -8,6 +8,9 @@ import com.momo.common.DBConnPool;
 import com.momo.dto.Criteria;
 import com.momo.lib.dto.BookDto;
 
+/**
+ * DB에 접근하여 쿼리를 질의 합니다.
+ */
 public class BookDao extends DBConnPool {
 
 	/**
@@ -17,6 +20,7 @@ public class BookDao extends DBConnPool {
 	 */
 	public List<BookDto> getList(Criteria cri) {
 		List<BookDto> list = new ArrayList<>();
+		
 		String sql = "select * \r\n" 
 				+ "        from book \r\n" + "        "
 				+ "        -- 최신 게시물 인지 조회하기 위해서 정렬\r\n"
@@ -112,4 +116,7 @@ public class BookDao extends DBConnPool {
 		
 		return res;
 	}
+
+	
+
 }

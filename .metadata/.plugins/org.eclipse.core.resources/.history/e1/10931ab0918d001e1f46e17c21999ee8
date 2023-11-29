@@ -1,0 +1,26 @@
+package com.momo.book.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FileUploadService {
+	private int maxSize = 1024*1000;
+	private String uploadDir = "c:/upload";
+	private String encode = "UTF-8";
+	
+	public FileUploadService() {}
+
+	public FileUploadService(int maxSize, String uploadDir, String encode) {
+		super();
+		this.maxSize = maxSize;
+		this.uploadDir = uploadDir;
+		this.encode = encode;
+	}
+	
+	public int fileUpload(HttpServletRequest request) {
+		int res = 0;
+		
+		return res;
+	}
+
+}

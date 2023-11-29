@@ -1,0 +1,16 @@
+127.0.0.1 - - [29/Nov/2023:12:06:38 +0900] "GET / HTTP/1.1" 200 148
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /book/reg.jsp HTTP/1.1" 200 24933
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /css/sb-admin-2.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /img/undraw_profile_1.svg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /img/undraw_profile_2.svg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /img/undraw_profile_3.svg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /img/undraw_profile.svg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /js/sb-admin-2.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /vendor/jquery/jquery.min.js HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /vendor/datatables/jquery.dataTables.min.js HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /vendor/datatables/dataTables.bootstrap4.min.js HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /vendor/fontawesome-free/css/all.min.css HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /vendor/datatables/dataTables.bootstrap4.min.css HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /vendor/jquery-easing/jquery.easing.min.js HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:06:40 +0900] "GET /favicon.ico HTTP/1.1" 404 206
+0:0:0:0:0:0:0:1 - - [29/Nov/2023:12:07:10 +0900] "POST /book/bookRegUploadProcess HTTP/1.1" 200 819

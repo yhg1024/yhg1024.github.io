@@ -139,4 +139,23 @@ public class BoardDao extends DBConnPool{
 		
 		return list;
 	}
+
+	/**
+	 * 게시글의 총 건수를 구합니다.
+	 * @return
+	 */
+	public int getTotalCnt() {
+		int total = 0;
+		String sql = "select count(*) from board";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
 }

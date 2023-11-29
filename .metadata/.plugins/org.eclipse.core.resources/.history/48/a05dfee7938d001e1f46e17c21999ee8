@@ -1,0 +1,46 @@
+package com.momo.book.service;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+
+public class FileUploadService {
+	private int maxSize = 1024*1000;
+	private String uploadDir = "c:/upload";
+	private String encode = "UTF-8";
+	
+	public FileUploadService() {}
+
+	public FileUploadService(int maxSize, String uploadDir, String encode) {
+		super();
+		this.maxSize = maxSize;
+		this.uploadDir = uploadDir;
+		this.encode = encode;
+	}
+	
+	public int fileUpload(HttpServletRequest request, String uploadFile) {
+		int res = 0;
+		try {
+			MultipartRequest mr = new MultipartRequest(request, uploadDir, maxSize, encode);
+			String fileName = mr.getFilesystemName(uploadFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	/**
+	 * 중복된 파일명의 경우 소실될 위험이 있으므로 파일명을 변경합니다.
+	 * 파일의 이름을 변경하고 변경된 이름을 반환합니다.
+	 */
+	public String rename() {
+		String fileName = "";
+		
+		return fileName;
+	}
+
+}

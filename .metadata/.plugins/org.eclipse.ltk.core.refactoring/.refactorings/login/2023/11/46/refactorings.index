@@ -1,0 +1,10 @@
+1699923121196	Rename package 'com.loginController'
+1699923129376	Rename package 'com.login.Controller'
+1699923156655	Delete element
+1699923356208	Delete element
+1699924640579	Move 'index.jsp' to 'WEB-INF'
+1699924645657	Move 'index.jsp' to 'webapp'
+1699926748894	Rename compilation unit 'package-info.java'
+1699926761717	Rename compilation unit 'package-info.java'
+1699930164671	Move 'board.jsp' to 'board'
+1699938802321	Rename type 'BoardList'

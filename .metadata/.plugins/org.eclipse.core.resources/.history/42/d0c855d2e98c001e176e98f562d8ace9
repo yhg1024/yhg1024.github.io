@@ -1,0 +1,14 @@
+package com.momo.dto;
+
+public class FileDto {
+
+
+private int file_no;
+private String name;
+private String title;
+private String cate;
+private String ofile;
+private String sfile;
+private String postdate;
+	
+}

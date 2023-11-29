@@ -1,0 +1,8 @@
+package com.momo.lib.dto;
+
+public class BookDto {
+	private String no;
+	private String title;
+	private String rentyn;
+	private String author;
+}

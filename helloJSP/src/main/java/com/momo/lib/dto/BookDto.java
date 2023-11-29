@@ -22,7 +22,7 @@ public class BookDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BookDto(String no, String title, String rentYn, String author) {
+	public BookDto(String no, String title, String author, String rentYn) {
 		super();
 		this.no = no;
 		this.title = title;
